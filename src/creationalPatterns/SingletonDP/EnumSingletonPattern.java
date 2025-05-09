@@ -4,10 +4,8 @@ public enum EnumSingletonPattern {
 
     INSTANCE;
 
-    private int value;
-
     public void doSomething() {
-        System.out.println(value);
+        System.out.println("Method of Enum singleton with value");
     }
 
 }
