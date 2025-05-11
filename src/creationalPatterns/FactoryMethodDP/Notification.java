@@ -1,5 +1,5 @@
 package creationalPatterns.FactoryMethodDP;
 
 public interface Notification {
-    void notifyUser();
+    String notifyUser();
 }
