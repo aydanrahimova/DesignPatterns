@@ -2,7 +2,7 @@ package creationalPatterns.FactoryMethodDP;
 
 public class EmailNotification implements Notification {
     @Override
-    public String notifyUser() {
-        return "Email notification sent";
+    public void notifyUser() {
+        System.out.println("Email notification sent");
     }
 }
