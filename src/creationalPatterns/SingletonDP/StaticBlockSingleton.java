@@ -1,6 +1,6 @@
 package creationalPatterns.SingletonDP;
 
-//this approach is similar to EagerSingletonPattern,but it provides exception handling
+//this approach is similar to EagerSingleton,but it provides exception handling
 
 public class StaticBlockSingleton {
     private StaticBlockSingleton() {

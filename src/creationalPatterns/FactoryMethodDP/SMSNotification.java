@@ -2,7 +2,7 @@ package creationalPatterns.FactoryMethodDP;
 
 public class SMSNotification implements Notification {
     @Override
-    public String notifyUser() {
-        return "SMS notification sent";
+    public void notifyUser() {
+        System.out.println("SMS sent");
     }
 }
