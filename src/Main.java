@@ -1,19 +1,15 @@
-import creationalPatterns.AbstractFactoryDP.*;
-import structuralPatterns.AdapterDP.ClassAdapter.MyGovClassAdapter;
-import structuralPatterns.AdapterDP.MyGov;
-import structuralPatterns.AdapterDP.ObjectAdapter.MyGovObjectAdapter;
-import structuralPatterns.AdapterDP.UserInfoProvider;
-import structuralPatterns.BridgeDP.*;
-import structuralPatterns.DecoratorDP.Coffee;
-import structuralPatterns.DecoratorDP.MilkCoffeeDecorator;
-import structuralPatterns.DecoratorDP.PlainCoffee;
-import structuralPatterns.DecoratorDP.SugarCoffeeDecorator;
-import structuralPatterns.FacadeDP.EmailService;
-import structuralPatterns.FacadeDP.UserRegistrationFacade;
-import structuralPatterns.FacadeDP.UserRepository;
-import structuralPatterns.FacadeDP.UserValidator;
-import structuralPatterns.ProxyDP.Image;
-import structuralPatterns.ProxyDP.ProxyImage;
+import behavioralPatterns.ChainOfResposibilityDP.AuthHandler;
+import behavioralPatterns.ChainOfResposibilityDP.Handler;
+import behavioralPatterns.ChainOfResposibilityDP.NotFoundHandler;
+import behavioralPatterns.IteratorDP.MyCollection;
+import behavioralPatterns.IteratorDP.MyIterator;
+import behavioralPatterns.ObserverDP.EmailSubscriber;
+import behavioralPatterns.ObserverDP.NewsChannel;
+import behavioralPatterns.ObserverDP.Observer;
+import behavioralPatterns.ObserverDP.TelegramSubscriber;
+import behavioralPatterns.StrategyDP.CreditCardPaymentStrategy;
+import behavioralPatterns.StrategyDP.PaymentStrategy;
+import behavioralPatterns.StrategyDP.ShoppingCard;
 
 import java.util.Scanner;
 
@@ -185,82 +181,114 @@ public class Main {
 //        }
 
 
-//Abstract Factory Design Pattern
-        System.out.println("-----------------Abstract Factory Design Pattern-----------------");
-        System.out.println("Please enter the type of team that you want to create:");
-        String teamType = scanner.nextLine();
-        TeamFactory teamFactory = switch (teamType) {
-            case "Bank App" -> new BankAppTeamFactory();
-            case "ChatBot" -> new ChatBotTeamFactory();
-            default -> null;
-        };
-
-        if (teamFactory != null) {
-            Developer developer = teamFactory.createDeveloper();
-            developer.writeCode();
-            ProductOwner po = teamFactory.createProductOwner();
-            po.manageProject();
-        } else {
-            System.out.println("Team factory is null");
-        }
-
-
-//AdapterDP Design Pattern
-        //Class AdapterDP
-//        System.out.println("-----------------AdapterDP Design Pattern-Class AdapterDP-----------------");
-        UserInfoProvider user = new MyGovClassAdapter("Aydan Rahimova", "123FIN", "01.01.2001");
-        System.out.println("User's name: " + user.getName());
-        System.out.println("User's surname: " + user.getSurname());
-        System.out.println("User's fin: " + user.getFin());
-        System.out.println("User's DOB: " + user.getDOB());
+////Abstract Factory Design Pattern
+//        System.out.println("-----------------Abstract Factory Design Pattern-----------------");
+//        System.out.println("Please enter the type of team that you want to create:");
+//        String teamType = scanner.nextLine();
+//        TeamFactory teamFactory = switch (teamType) {
+//            case "Bank App" -> new BankAppTeamFactory();
+//            case "ChatBot" -> new ChatBotTeamFactory();
+//            default -> null;
+//        };
 //
-//        //Object AdapterDP
-//        System.out.println("-----------------AdapterDP Design Pattern-Object AdapterDP-----------------");
-        MyGov myGov = new MyGov("Aydan Rahimova", "123FIN", "01.01.2001");
-        UserInfoProvider user1 = new MyGovObjectAdapter(myGov);
-        System.out.println("User's name: " + user.getName());
-        System.out.println("User's surname: " + user.getSurname());
-        System.out.println("User's fin: " + user.getFin());
-        System.out.println("User's DOB: " + user.getDOB());
+//        if (teamFactory != null) {
+//            Developer developer = teamFactory.createDeveloper();
+//            developer.writeCode();
+//            ProductOwner po = teamFactory.createProductOwner();
+//            po.manageProject();
+//        } else {
+//            System.out.println("Team factory is null");
+//        }
+//
+//
+////AdapterDP Design Pattern
+//        //Class AdapterDP
+////        System.out.println("-----------------AdapterDP Design Pattern-Class AdapterDP-----------------");
+//        UserInfoProvider user = new MyGovClassAdapter("Aydan Rahimova", "123FIN", "01.01.2001");
+//        System.out.println("User's name: " + user.getName());
+//        System.out.println("User's surname: " + user.getSurname());
+//        System.out.println("User's fin: " + user.getFin());
+//        System.out.println("User's DOB: " + user.getDOB());
+////
+////        //Object AdapterDP
+////        System.out.println("-----------------AdapterDP Design Pattern-Object AdapterDP-----------------");
+//        MyGov myGov = new MyGov("Aydan Rahimova", "123FIN", "01.01.2001");
+//        UserInfoProvider user1 = new MyGovObjectAdapter(myGov);
+//        System.out.println("User's name: " + user.getName());
+//        System.out.println("User's surname: " + user.getSurname());
+//        System.out.println("User's fin: " + user.getFin());
+//        System.out.println("User's DOB: " + user.getDOB());
+//
+////Proxy Design Pattern
+//        //this logic represents use of proxy pattern for lazy initialization
+//        System.out.println("-----------------Proxy Design Pattern-----------------");
+//        Image image = new ProxyImage("photo.jpg");
+//        System.out.println("First attempt to display the image:");
+//        image.display();//loading+display
+//        System.out.println("Second attempt to display the image:");
+//        image.display();//only display
+//
+////Bridge Design Pattern
+//        //without Bridge Design Pattern every combination of Shape and Color will require its own class like RedTriangle,RedRectangular etc.
+//        System.out.println("-----------------Bridge Design Pattern-----------------");
+//        Shape triangle = new Triangle(new RedColor());
+//        triangle.applyColor();
+//        Shape rectangular = new Rectangular(new GreenColor());
+//        rectangular.applyColor();
+//
+////Facade Design Pattern
+//        System.out.println("-----------------Facade Design Pattern-----------------");
+//        UserRegistrationFacade registrationFacade = new UserRegistrationFacade(new UserValidator(), new UserRepository(), new EmailService());
+//        System.out.println("Registration of 1st user started...");
+//        registrationFacade.registerUser("aydan@gmail.com", "123456");
+//        System.out.println("Registration of 2nd user started...");
+//        registrationFacade.registerUser("aydan_gmail.com", "123456");
 
-//Proxy Design Pattern
-        //this logic represents use of proxy pattern for lazy initialization
-        System.out.println("-----------------Proxy Design Pattern-----------------");
-        Image image = new ProxyImage("photo.jpg");
-        System.out.println("First attempt to display the image:");
-        image.display();//loading+display
-        System.out.println("Second attempt to display the image:");
-        image.display();//only display
+////Decorator Design Pattern
+//        System.out.println("-----------------Decorator Design Pattern-----------------");
+//        Coffee plainCoffee = new PlainCoffee();
+//        System.out.println(plainCoffee.getDescription());
+//        System.out.println(plainCoffee.getPrice());
+//
+//        Coffee coffeeWithMilk = new MilkCoffeeDecorator(plainCoffee);
+//        System.out.println(coffeeWithMilk.getDescription());
+//        System.out.println(coffeeWithMilk.getPrice());
+//
+//        Coffee coffeeWithMilkAndSugar = new SugarCoffeeDecorator(new MilkCoffeeDecorator(plainCoffee));
+//        System.out.println(coffeeWithMilkAndSugar.getDescription());
+//        System.out.println(coffeeWithMilkAndSugar.getPrice());
 
-//Bridge Design Pattern
-        //without Bridge Design Pattern every combination of Shape and Color will require its own class like RedTriangle,RedRectangular etc.
-        System.out.println("-----------------Bridge Design Pattern-----------------");
-        Shape triangle = new Triangle(new RedColor());
-        triangle.applyColor();
-        Shape rectangular = new Rectangular(new GreenColor());
-        rectangular.applyColor();
+//Iterator Design Pattern
+//        System.out.println("-----------------Iterator Design Pattern-----------------");
+//        MyCollection<String> collection = new MyCollection<>(5);
+//        collection.add("A");
+//        collection.add("B");
+//        collection.add("C");
+//        MyIterator<String> collectionIterator = collection.iterator();
+//        while (collectionIterator.hasNext()) {
+//            System.out.println(collectionIterator.next());
+//        }
+//
+////Strategy Design Pattern
+//        ShoppingCard shoppingCard = new ShoppingCard();
+//        shoppingCard.setPaymentStrategy(new CreditCardPaymentStrategy());
+//        shoppingCard.checkout(123.4);
 
-//Facade Design Pattern
-        System.out.println("-----------------Facade Design Pattern-----------------");
-        UserRegistrationFacade registrationFacade = new UserRegistrationFacade(new UserValidator(), new UserRepository(), new EmailService());
-        System.out.println("Registration of 1st user started...");
-        registrationFacade.registerUser("aydan@gmail.com", "123456");
-        System.out.println("Registration of 2nd user started...");
-        registrationFacade.registerUser("aydan_gmail.com", "123456");
+////Observer Design Pattern
+//        NewsChannel channel = new NewsChannel();
+//        channel.setNews("newss");
+//        Observer emailSubscriber = new EmailSubscriber();
+//        Observer telegramSubscriber = new TelegramSubscriber();
+//        channel.addObserver(emailSubscriber);
+//        channel.addObserver(telegramSubscriber);
+//        channel.notifyObservers();
 
-//Decorator Design Pattern
-        System.out.println("-----------------Decorator Design Pattern-----------------");
-        Coffee plainCoffee = new PlainCoffee();
-        System.out.println(plainCoffee.getDescription());
-        System.out.println(plainCoffee.getPrice());
-
-        Coffee coffeeWithMilk = new MilkCoffeeDecorator(plainCoffee);
-        System.out.println(coffeeWithMilk.getDescription());
-        System.out.println(coffeeWithMilk.getPrice());
-
-        Coffee coffeeWithMilkAndSugar = new SugarCoffeeDecorator(new MilkCoffeeDecorator(plainCoffee));
-        System.out.println(coffeeWithMilkAndSugar.getDescription());
-        System.out.println(coffeeWithMilkAndSugar.getPrice());
+//Chain of Responsibility Design Pattern
+        Handler auth = new AuthHandler();
+        Handler notFound = new NotFoundHandler();
+        auth.setNextHandler(notFound);//request birinci authHandlerden kececek ve daha sonra notFoundHandlere kecid edecek
+        auth.handle("not found");
+        //smth
 
     }
 
