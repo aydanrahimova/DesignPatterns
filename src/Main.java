@@ -1,3 +1,6 @@
+import behavioralPatterns.ChainOfResposibilityDP.AuthHandler;
+import behavioralPatterns.ChainOfResposibilityDP.Handler;
+import behavioralPatterns.ChainOfResposibilityDP.NotFoundHandler;
 import behavioralPatterns.IteratorDP.MyCollection;
 import behavioralPatterns.IteratorDP.MyIterator;
 import behavioralPatterns.ObserverDP.EmailSubscriber;
@@ -240,7 +243,7 @@ public class Main {
 //        registrationFacade.registerUser("aydan@gmail.com", "123456");
 //        System.out.println("Registration of 2nd user started...");
 //        registrationFacade.registerUser("aydan_gmail.com", "123456");
-//
+
 ////Decorator Design Pattern
 //        System.out.println("-----------------Decorator Design Pattern-----------------");
 //        Coffee plainCoffee = new PlainCoffee();
@@ -271,17 +274,23 @@ public class Main {
 //        shoppingCard.setPaymentStrategy(new CreditCardPaymentStrategy());
 //        shoppingCard.checkout(123.4);
 
-//Observer Design Pattern
-        NewsChannel channel = new NewsChannel();
-        channel.setNews("newss");
-        Observer emailSubscriber = new EmailSubscriber();
-        Observer telegramSubscriber = new TelegramSubscriber();
-        channel.addObserver(emailSubscriber);
-        channel.addObserver(telegramSubscriber);
-        channel.notifyObservers();
+////Observer Design Pattern
+//        NewsChannel channel = new NewsChannel();
+//        channel.setNews("newss");
+//        Observer emailSubscriber = new EmailSubscriber();
+//        Observer telegramSubscriber = new TelegramSubscriber();
+//        channel.addObserver(emailSubscriber);
+//        channel.addObserver(telegramSubscriber);
+//        channel.notifyObservers();
+
+//Chain of Responsibility Design Pattern
+        Handler auth = new AuthHandler();
+        Handler notFound = new NotFoundHandler();
+        auth.setNextHandler(notFound);//request birinci authHandlerden kececek ve daha sonra notFoundHandlere kecid edecek
+        auth.handle("not found");
+        //smth
 
     }
-
 
 
 }
